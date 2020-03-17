@@ -48,7 +48,7 @@ for submission in top_subreddit:
     topics_dict["body"].append(submission.selftext)
 
 topics_data = pd.DataFrame(topics_dict)
-print(topics_data)
+topics_data.sort_values(by=['score'],inplace=True,ascending=False)
 
 def get_date(created):
     return dt.datetime.fromtimestamp(created)
