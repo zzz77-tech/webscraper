@@ -1,4 +1,7 @@
 from bs4 import BeautifulSoup
+from dotenv import load_dotenv
+from pathlib import Path
+import os
 import requests
 import csv
 import time
@@ -7,14 +10,21 @@ import pandas as pd
 import datetime as dt
 import re
 
-reddit = praw.Reddit(client_id='mr3bQnCiNhaT2g', \
-                     client_secret='psDFyHhoyOtghdOw-XAiO3oMYeI', \
-                     user_agent='kopic_bot', \
+# loading environment path to Path object
+env_path = Path('.') /'.env'
+
+#loading the path to the laoder
+load_dotenv(dotenv_path=env_path,verbose=True)
+
+#print(os.getenv("CLIENT_ID"))
+reddit = praw.Reddit(client_id= os.getenv("CLIENT_ID"), \
+                     client_secret=os.getenv("CLIENT_SECRET"), \
+                     user_agent=os.getenv("USER_AGENT"), \
                      username='R_python96', \
-                     password='000011')
+                     password=os.getenv("PASSWORD"))
 
 subreddit = reddit.subreddit('singapore')
-top_subreddit = subreddit.top()
+top_subreddit = subreddit.hot()
 print((top_subreddit))
 #for submission in subreddit.top(limit=10):
 #    print("Submission title: {},Submission id: {}".format(submission.title, submission.id))
