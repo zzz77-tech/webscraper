@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 from pathlib import Path
 import os
+import json
 import requests
 import csv
 import time
@@ -9,6 +10,7 @@ import praw
 import pandas as pd
 import datetime as dt
 import re
+
 
 # loading environment path to Path object
 env_path = Path('.') /'.env'
@@ -50,10 +52,12 @@ for submission in top_subreddit:
 topics_data = pd.DataFrame(topics_dict)
 topics_data.sort_values(by=['score'],inplace=True,ascending=False)
 
-def get_date(created):
-    return dt.datetime.fromtimestamp(created)
-_timestamp = topics_data["created"].apply(get_date)
-topics_data = topics_data.assign(timestamp = _timestamp)
+#def get_date(created):
+ #   return dt.datetime.fromtimestamp(created)
+#_timestamp = topics_data["created"].apply(get_date)
+#topics_data = topics_data.assign(timestamp = _timestamp)
+topics_data['created'] = topics_data['created'].astype(str)
+topics_data = topics_data.values.tolist()
 print(topics_data)
 
-topics_data.to_csv('reddit_singapore.csv', index=False) 
+#topics_data.to_csv('reddit_singapore.csv', index=False) 
