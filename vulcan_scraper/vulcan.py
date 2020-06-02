@@ -15,6 +15,8 @@ links = []
 results = []
 
 
+
+
 soup = BeautifulSoup(page.content, 'html.parser')
 #print(soup.p)
 news_headlines = soup.find_all('div',class_ = 'article-excerpt')
@@ -31,6 +33,9 @@ for i in web_links:
     #print(i['href'])
     links.append('https://vulcanpost.com/'+ i['href'])
 
+  
+    
+
 
 # traverse through every news article which is the links to the articles
 # for every article, find the tag that contains the story and scrape 
@@ -38,5 +43,5 @@ for i in web_links:
 
 
 for j in range(len(articles)):
-    results.append([articles[j],links[j]])
+    results.append([articles[j],links[j])
 #print(results)
